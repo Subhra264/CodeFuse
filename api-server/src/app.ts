@@ -1,17 +1,20 @@
 import Express, { Request, Response } from 'express';
+import cors from 'cors';
 import { envConfig as EnvConfig } from '../env';
 import { OpenAIApi, Configuration } from 'openai';
 
 const PORT = EnvConfig.PORT || 8000;
+
 const app = Express();
+app.use(Express.json({ limit: '25mb' }));
+app.use(Express.urlencoded({ extended: true, limit: '25mb' }));
+app.use(cors());
 
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+  apiKey: EnvConfig.OPENAI_API_KEY,
 });
 
 const openai = new OpenAIApi(configuration);
-
-app.use(Express.json());
 
 app.post('/', async (req: Request, res: Response) => {
   const { code } = req.body;

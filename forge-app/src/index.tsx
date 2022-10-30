@@ -1,34 +1,36 @@
-// import ForgeUI, { render, Fragment, Macro, Text, useState, Button } from "@forge/ui";
-import ForgeUI,
-  {
-    render,
-    ContextMenu,
-    InlineDialog,
-    Text,
-    useState,
-    Strong,
-    useProductContext,
-    useEffect,
-  } from '@forge/ui';
+import ForgeUI, {
+  render,
+  ContextMenu,
+  InlineDialog,
+  Text,
+  useState,
+  Strong,
+  useProductContext,
+  useEffect,
+} from '@forge/ui';
 
 import { fetch } from '@forge/api';
 
 const createDocFromTemplate = async () => {
-  return fetch("https://jsonplaceholder.typicode.com/todos").then(res=> res.json()).then(data => data)
+  return fetch('https://jsonplaceholder.typicode.com/todos')
+    .then((res) => res.json())
+    .then((data) => data);
 };
 
 interface DataType {
-    userId:    number;
-    id:        number;
-    title:     string;
-    completed: boolean;
+  userId: number;
+  id: number;
+  title: string;
+  completed: boolean;
 }
 
 const App = () => {
   const [data, setData] = useState<DataType[]>([]);
 
-  // @ts-ignore
-  const { extensionContext: { selectedText } } = useProductContext();
+  const {
+    // @ts-ignore
+    extensionContext: { selectedText },
+  } = useProductContext();
 
   useEffect(async () => {
     setData(await createDocFromTemplate());
@@ -36,7 +38,9 @@ const App = () => {
 
   return (
     <InlineDialog>
-      <Text><Strong>Selected text</Strong></Text>
+      <Text>
+        <Strong>Selected text</Strong>
+      </Text>
       <Text>{selectedText}</Text>
       {/* <Text>{data.length ? "Your data is ready" : "Fetching"}</Text> */}
       {/* <Button text="Fetch Data" onClick={async () => setData(await createDocFromTemplate())} /> */}
@@ -52,6 +56,6 @@ const App = () => {
 
 export const run = render(
   <ContextMenu>
-    <App/>
-  </ContextMenu>
+    <App />
+  </ContextMenu>,
 );
