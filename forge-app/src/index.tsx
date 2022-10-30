@@ -3,16 +3,19 @@ import ForgeUI, {
   ContextMenu,
   InlineDialog,
   Text,
+  Button,
   useState,
   Strong,
   useProductContext,
   useEffect,
+  Fragment,
+  ButtonSet,
 } from '@forge/ui';
 
 import { fetch } from '@forge/api';
 
 const createDocFromTemplate = async () => {
-  return fetch('https://jsonplaceholder.typicode.com/todos')
+  return fetch('https://1d25-202-142-71-153.ngrok.io')
     .then((res) => res.json())
     .then((data) => data);
 };
@@ -25,16 +28,30 @@ interface DataType {
 }
 
 const App = () => {
-  const [data, setData] = useState<DataType[]>([]);
+  const [result, setResult] = useState<string>('');
 
   const {
     // @ts-ignore
     extensionContext: { selectedText },
   } = useProductContext();
 
-  useEffect(async () => {
-    setData(await createDocFromTemplate());
-  }, [selectedText]);
+  const explainCode = async () => {
+    const response_ = await fetch('https://1d25-202-142-71-153.ngrok.io', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        code: selectedText
+      })
+    });
+
+    const response = await response_.json();
+    console.log('Response', response)
+    const explanation = response?.message.length && response?.message[0].text;
+
+    setResult(explanation);
+  }
 
   return (
     <InlineDialog>
@@ -42,8 +59,25 @@ const App = () => {
         <Strong>Selected text</Strong>
       </Text>
       <Text>{selectedText}</Text>
-      {/* <Text>{data.length ? "Your data is ready" : "Fetching"}</Text> */}
-      {/* <Button text="Fetch Data" onClick={async () => setData(await createDocFromTemplate())} /> */}
+
+      <ButtonSet>
+        <Button text="Explain Code" onClick={explainCode} />
+        <Button text="Calculate Time Complexity" onClick={async () => {}} />
+        <Button text="Translate languages" onClick={async () => {}} />
+        <Button text="SQL" onClick={async () => {}} />
+      </ButtonSet>
+
+      {
+        result && (
+          <Fragment>
+            <Text>
+              <Strong>Result</Strong>
+            </Text>
+            <Text>{result}</Text>
+          </Fragment>
+        )
+      }
+
       {/* {data?.map((item:DataType) => (
         <Text>{ item.title}</Text>
       ))} */}
