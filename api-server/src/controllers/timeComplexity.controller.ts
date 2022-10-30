@@ -1,24 +1,24 @@
 import { Request, Response } from 'express';
 import { openAi } from '@/utils/openAi';
 
-export async function explainCode(req: Request, res: Response) {
+export async function calculateComplexity(req: Request, res: Response) {
   const { code } = req.body;
 
   if (!code) {
     return res.json({
-      message: 'Select the code snippet you want to explain',
+      message: 'Select the code snippet you want to measure the time complexity of',
     });
   }
 
   const response = await openAi.createCompletion({
     model: 'text-davinci-002',
-    prompt: code + '"""\nHere\'s what the above code is doing:\n',
+    prompt: code + '"""\nThe time complexity of this function is',
     temperature: 0,
     max_tokens: 64,
     top_p: 1.0,
     frequency_penalty: 0.0,
     presence_penalty: 0.0,
-    stop: ['"""'],
+    stop: ['\n'],
   });
 
   return res.json({

@@ -1,7 +1,8 @@
 import express from 'express';
+import { calculateComplexity } from '@/controllers/timeComplexity.controller';
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
-  res.send('Hello World!');
-});
+router.post('/', calculateComplexity);
+
+export default router;
