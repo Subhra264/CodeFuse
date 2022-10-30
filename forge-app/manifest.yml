@@ -1,0 +1,18 @@
+modules:
+  confluence:contextMenu:
+    - key: open-ai
+      function: main
+      title: open-ai
+      description: Integrates Open AI
+  function:
+    - key: main
+      handler: index.run
+permissions:
+  scopes: []
+  external:
+    fetch:
+      backend:
+        - jsonplaceholder.typicode.com
+app:
+  id: ari:cloud:ecosystem::app/400dda5a-e1b0-4170-9c78-d515d3479782
+  # name: tidy
