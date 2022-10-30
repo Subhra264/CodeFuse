@@ -1,7 +1,7 @@
 {
-  "name": "context-menu-backend",
+  "name": "codefuse-api-server",
   "version": "1.0.0",
-  "description": "Backend for forge context-menu-app",
+  "description": "Backend API server for CodeFuse",
   "main": "index.js",
   "author": "Subhradeep Chakraborty",
   "license": "MIT",
