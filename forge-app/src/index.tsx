@@ -36,7 +36,7 @@ const App = () => {
   } = useProductContext();
 
   const explainCode = async () => {
-    const response_ = await fetch('https://1d25-202-142-71-153.ngrok.io', {
+    const response_ = await fetch('https://1d25-202-142-71-153.ngrok.io/code-explain', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -48,7 +48,7 @@ const App = () => {
 
     const response = await response_.json();
     console.log('Response', response)
-    const explanation = response?.message.length && response?.message[0].text;
+    const explanation = response.message;
 
     setResult(explanation);
   }
