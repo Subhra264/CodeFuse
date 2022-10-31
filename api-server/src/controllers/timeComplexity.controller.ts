@@ -21,7 +21,11 @@ export async function calculateComplexity(req: Request, res: Response) {
     stop: ['\n'],
   });
 
+  const timeComplexity = response.data.choices[0].text;
+
+  console.log(timeComplexity);
+
   return res.json({
-    message: response.data.choices[0].text,
+    message: timeComplexity,
   });
 }

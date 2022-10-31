@@ -21,7 +21,11 @@ export async function explainCode(req: Request, res: Response) {
     stop: ['"""'],
   });
 
+  const explanation = response.data.choices[0].text;
+
+  console.log(explanation);
+
   return res.json({
-    message: response.data.choices[0].text,
+    message: explanation,
   });
 }

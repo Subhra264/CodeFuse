@@ -1,19 +1,21 @@
 import { fetch } from '@forge/api';
+import { API_BASE_URL } from './config';
 
-const getCodeInfo = async (route: string, selectedText: string): Promise<string> => {
-	const response_ = await fetch(`https://bbf4-202-142-71-153.ngrok.io/${route}`, {
-		method: 'POST',
-		headers: {
-		'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({
-			code: selectedText
-		})
-	});
+type RouteType = 'code-explain' | 'time-complexity';
 
-	const response = await response_.json();
-	console.log('Response', response)
-	return response.message;
-}
+const getCodeInfo = async (route: RouteType, selectedText: string): Promise<string> => {
+  const response_ = await fetch(`${API_BASE_URL}/${route}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      code: selectedText,
+    }),
+  });
+
+  const response = await response_.json();
+  return response.message;
+};
 
 export default getCodeInfo;

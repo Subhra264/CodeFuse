@@ -7,38 +7,37 @@ import ForgeUI, {
   useState,
   Strong,
   useProductContext,
-  useEffect,
   Fragment,
   ButtonSet,
 } from '@forge/ui';
+import type { ContextMenuExtensionContext } from '@forge/ui';
 
-import { fetch } from '@forge/api';
 import getCodeInfo from './utils/fetchCodeInfo';
 
 const App = () => {
   const [result, setResult] = useState<string>('');
 
-  const {
-    // @ts-ignore
-    extensionContext: { selectedText },
-  } = useProductContext();
+  const { extensionContext } = useProductContext();
+  const selectedText = (extensionContext as ContextMenuExtensionContext).selectedText;
+
+  const code = selectedText.replace(/^[0-9]+/gm, '').trim();
 
   const explainCode = async () => {
-    const explanation = await getCodeInfo('code-explain', selectedText);
-    setResult(explanation);
-  }
+    const res = await getCodeInfo('code-explain', code);
+    setResult(res);
+  };
 
   const calculateComplexity = async () => {
-    const explanation = await getCodeInfo('time-complexity', selectedText);
-    setResult(explanation);
-  }
+    const res = await getCodeInfo('time-complexity', code);
+    setResult(res);
+  };
 
   return (
     <InlineDialog>
       <Text>
         <Strong>Selected text</Strong>
       </Text>
-      <Text>{selectedText}</Text>
+      <Text>{code}</Text>
 
       <ButtonSet>
         <Button text="Explain Code" onClick={explainCode} />
@@ -47,16 +46,14 @@ const App = () => {
         <Button text="SQL" onClick={async () => {}} />
       </ButtonSet>
 
-      {
-        result && (
-          <Fragment>
-            <Text>
-              <Strong>Result</Strong>
-            </Text>
-            <Text>{result}</Text>
-          </Fragment>
-        )
-      }
+      {result && (
+        <Fragment>
+          <Text>
+            <Strong>Result</Strong>
+          </Text>
+          <Text>{result}</Text>
+        </Fragment>
+      )}
     </InlineDialog>
   );
 };
