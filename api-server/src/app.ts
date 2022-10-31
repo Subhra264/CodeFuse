@@ -2,7 +2,12 @@ import Express from 'express';
 import cors from 'cors';
 import { envConfig as EnvConfig } from '@/config/env';
 
-import { CodeExplainRoute, TimeComplexityRoute, SqlTranslateRoute } from '@/routes';
+import {
+  CodeExplainRoute,
+  TimeComplexityRoute,
+  SqlTranslateRoute,
+  TranslateLangRoute,
+} from '@/routes';
 
 const PORT = EnvConfig.PORT || 8000;
 
@@ -24,6 +29,9 @@ app.use('/time-complexity', TimeComplexityRoute);
 
 // SQL Translate Route
 app.use('/sql-translate', SqlTranslateRoute);
+
+// Translate Language Route
+app.use('/translate-lang', TranslateLangRoute);
 
 app.listen(PORT, () => {
   console.log('App listening on port', PORT);
