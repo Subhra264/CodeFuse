@@ -13,6 +13,7 @@ import ForgeUI, {
 } from '@forge/ui';
 
 import { fetch } from '@forge/api';
+import getCodeInfo from './utils/fetchCodeInfo';
 
 const createDocFromTemplate = async () => {
   return fetch('https://1d25-202-142-71-153.ngrok.io')
@@ -36,20 +37,12 @@ const App = () => {
   } = useProductContext();
 
   const explainCode = async () => {
-    const response_ = await fetch('https://1d25-202-142-71-153.ngrok.io/code-explain', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        code: selectedText
-      })
-    });
+    const explanation = await getCodeInfo('code-explain', selectedText);
+    setResult(explanation);
+  }
 
-    const response = await response_.json();
-    console.log('Response', response)
-    const explanation = response.message;
-
+  const calculateComplexity = async () => {
+    const explanation = await getCodeInfo('time-complexity', selectedText);
     setResult(explanation);
   }
 
@@ -62,7 +55,7 @@ const App = () => {
 
       <ButtonSet>
         <Button text="Explain Code" onClick={explainCode} />
-        <Button text="Calculate Time Complexity" onClick={async () => {}} />
+        <Button text="Calculate Time Complexity" onClick={calculateComplexity} />
         <Button text="Translate languages" onClick={async () => {}} />
         <Button text="SQL" onClick={async () => {}} />
       </ButtonSet>
