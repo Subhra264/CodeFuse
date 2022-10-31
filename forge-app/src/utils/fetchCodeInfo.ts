@@ -1,7 +1,7 @@
 import { fetch } from '@forge/api';
 import { API_BASE_URL } from './config';
 
-type RouteType = 'code-explain' | 'time-complexity';
+type RouteType = 'code-explain' | 'time-complexity' | 'sql-translate';
 
 const getCodeInfo = async (route: RouteType, selectedText: string): Promise<string> => {
   const response_ = await fetch(`${API_BASE_URL}/${route}`, {

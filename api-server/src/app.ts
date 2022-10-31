@@ -2,8 +2,7 @@ import Express from 'express';
 import cors from 'cors';
 import { envConfig as EnvConfig } from '@/config/env';
 
-import CodeExplainRoute from '@/routes/codeExplain.route';
-import TimeComplexityRoute from '@/routes/timeComplexity.route';
+import { CodeExplainRoute, TimeComplexityRoute, SqlTranslateRoute } from '@/routes';
 
 const PORT = EnvConfig.PORT || 8000;
 
@@ -22,6 +21,9 @@ app.use('/code-explain', CodeExplainRoute);
 
 // Calculate time complexity route
 app.use('/time-complexity', TimeComplexityRoute);
+
+// SQL Translate Route
+app.use('/sql-translate', SqlTranslateRoute);
 
 app.listen(PORT, () => {
   console.log('App listening on port', PORT);

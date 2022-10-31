@@ -32,6 +32,11 @@ const App = () => {
     setResult(res);
   };
 
+  const translateSQL = async () => {
+    const res = await getCodeInfo('sql-translate', code);
+    setResult(res);
+  };
+
   return (
     <InlineDialog>
       <Text>
@@ -42,8 +47,8 @@ const App = () => {
       <ButtonSet>
         <Button text="Explain Code" onClick={explainCode} />
         <Button text="Calculate Time Complexity" onClick={calculateComplexity} />
+        <Button text="SQL Translate" onClick={translateSQL} />
         <Button text="Translate languages" onClick={async () => {}} />
-        <Button text="SQL" onClick={async () => {}} />
       </ButtonSet>
 
       {result && (
