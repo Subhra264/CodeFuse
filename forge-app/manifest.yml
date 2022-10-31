@@ -12,6 +12,6 @@ permissions:
   external:
     fetch:
       backend:
-        - 67fd-113-21-77-212.ngrok.io
+        - codefuse-server.onrender.com
 app:
   id: ari:cloud:ecosystem::app/dd58a952-4023-4e7b-9078-a8b537d3255d
