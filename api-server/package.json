@@ -6,7 +6,7 @@
   "author": "Subhradeep Chakraborty",
   "license": "MIT",
   "scripts": {
-    "build": "tsc --project ./",
+    "build": "",
     "start:dev": "nodemon --watch ./src --exec \"ts-node\" ./src/app.ts",
     "start:prod": "node dist/app.js",
     "gen:env": "neoenv --ts --out ./src/config/env.ts"
