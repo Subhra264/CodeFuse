@@ -6,7 +6,7 @@
   "author": "Subhradeep Chakraborty",
   "license": "MIT",
   "scripts": {
-    "build": "",
+    "build": "yarn gen:env",
     "start:dev": "nodemon --watch ./src --exec \"ts-node\" ./src/app.ts",
     "start:prod": "node dist/app.js",
     "gen:env": "neoenv --ts --out ./src/config/env.ts"
