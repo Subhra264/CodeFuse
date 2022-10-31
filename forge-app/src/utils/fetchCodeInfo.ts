@@ -1,7 +1,7 @@
 import { fetch } from '@forge/api';
 
 const getCodeInfo = async (route: string, selectedText: string): Promise<string> => {
-	const response_ = await fetch(`https://1d25-202-142-71-153.ngrok.io/${route}`, {
+	const response_ = await fetch(`https://bbf4-202-142-71-153.ngrok.io/${route}`, {
 		method: 'POST',
 		headers: {
 		'Content-Type': 'application/json'

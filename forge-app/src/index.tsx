@@ -15,19 +15,6 @@ import ForgeUI, {
 import { fetch } from '@forge/api';
 import getCodeInfo from './utils/fetchCodeInfo';
 
-const createDocFromTemplate = async () => {
-  return fetch('https://1d25-202-142-71-153.ngrok.io')
-    .then((res) => res.json())
-    .then((data) => data);
-};
-
-interface DataType {
-  userId: number;
-  id: number;
-  title: string;
-  completed: boolean;
-}
-
 const App = () => {
   const [result, setResult] = useState<string>('');
 
@@ -69,13 +56,6 @@ const App = () => {
             <Text>{result}</Text>
           </Fragment>
         )
-      }
-
-      {/* {data?.map((item:DataType) => (
-        <Text>{ item.title}</Text>
-      ))} */}
-      {
-        // data && data[0] && <Text>{ data[0].title }</Text>
       }
     </InlineDialog>
   );

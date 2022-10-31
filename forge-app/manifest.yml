@@ -12,6 +12,6 @@ permissions:
   external:
     fetch:
       backend:
-        - 1d25-202-142-71-153.ngrok.io
+        - bbf4-202-142-71-153.ngrok.io
 app:
   id: ari:cloud:ecosystem::app/400dda5a-e1b0-4170-9c78-d515d3479782
