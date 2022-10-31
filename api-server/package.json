@@ -16,9 +16,7 @@
     "express": "^4.18.2",
     "lang-detector": "^1.0.6",
     "neoenv": "^1.2.0",
-    "openai": "^3.0.1"
-  },
-  "devDependencies": {
+    "openai": "^3.0.1",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.14",
     "@types/node": "^18.11.7",
